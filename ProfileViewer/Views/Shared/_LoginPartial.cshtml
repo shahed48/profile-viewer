@@ -1,22 +1,20 @@
-﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+﻿<div class="sidebar">
+    <h2>Welcome</h2>
+    <ul id="asideNav">
+        <li><a href="javascript:void(0)" class="nav-anchor active arrow" onclick="UpdateSelect(event, 'dashboard')"><i class="fa fa-home" aria-hidden="true"></i>Dashboard</a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'profile')"><i class="fa fa-user"></i>My Profile</a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'works')"><i class="fa fa-cog"></i>Works</a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'business')"><i class="fa fa-cogs"></i>Manage Business</a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'users')"><i class="fa fa-user-plus"></i>Users</a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'Customers')"><i class="fa fa-user-circle"></i>Customers</a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'schedule')"><i class="fa fa-calendar"></i>Schedule</a></li>
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.AntiForgeryToken()
+                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-power-off"></i>Logout</a></li>
+            }
+        }
     </ul>
-    }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}
+</div>

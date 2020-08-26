@@ -30,5 +30,8 @@ namespace Core.DB
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<UserProfiles> UserProfiles { get; set; }
+        public virtual DbSet<UserWorks> UserWorks { get; set; }
+        public virtual DbSet<Works> Works { get; set; }
     }
 }

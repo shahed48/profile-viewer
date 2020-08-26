@@ -1,0 +1,118 @@
+﻿@model Core.ViewModel.ProfileViewModel
+@using Microsoft.AspNet.Identity
+
+<div class="base-view">
+    <h4>My Profile</h4>
+    <h6>@User.Identity.GetUserName()</h6>
+
+    @using (Html.BeginForm())
+    {
+        <div class="row mt-2 mb-2">
+            <div class="col-md-12">
+                <button class="btn btn-primary btn-sm pull-right" id="Edit" onclick="EnableForEdit(event)"><i class="fa fa-edit"></i>&nbsp;Edit</button>
+                <button type="submit" id="saveEdit" class="btn btn-success btn-sm d-none pull-right ml-2"><i class="fa fa-save"></i>&nbsp;Save</button>
+                <button type="button" id="cancelEdit" class="btn btn-danger btn-sm d-none pull-right" onclick="DisableForEdit(event)"><i class="fa fa-close"></i>&nbsp;Cancel</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p class="card-header">Profile Picture</p>
+                <div class="profile-picture-box">
+                    <img src="@Url.Content("~/Content/dp.jpg")" alt="profile-pic" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <p class="card-header">Basic Information</p>
+                <div class="profile-content">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+                        <div class="row mr-1 ml-1">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="prof-content-size">Email Address (Username) <a>Change Username</a></label>
+                                    <div>
+                                        @Html.EditorFor(model => model.ParimaryEmailAddress, new { htmlAttributes = new { @class = "form-control prof-content-size", @disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.ParimaryEmailAddress, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="prof-content-size">First Name</label>
+                                    <div>
+                                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control prof-content-size", @disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="prof-content-size">Preffered Phone Number</label>
+                                    <div>
+                                        @Html.EditorFor(model => model.PrimaryPhone, new { htmlAttributes = new { @class = "form-control prof-content-size", @disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.PrimaryPhone, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="prof-content-size">Alternate Email address (Optional)</label>
+                                    <div>
+                                        @Html.EditorFor(model => model.AlternateEmailAddress, new { htmlAttributes = new { @class = "form-control prof-content-size", @disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.AlternateEmailAddress, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="prof-content-size">Last Name</label>
+                                    <div>
+                                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control prof-content-size", @disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="prof-content-size">Alternate Phone Number (Optional)</label>
+                                    <div>
+                                        @Html.EditorFor(model => model.AlternatePhone, new { htmlAttributes = new { @class = "form-control prof-content-size", @disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.AlternatePhone, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    function EnableForEdit(e) {
+        e.preventDefault()
+        $('#AlternateEmailAddress').prop('disabled', false);
+        $('#FirstName').prop('disabled', false);
+        $('#LastName').prop('disabled', false);
+        $('#PrimaryPhone').prop('disabled', false);
+        $('#AlternatePhone').prop('disabled', false);
+
+        $('#saveEdit').removeClass('d-none');
+        $("#cancelEdit").removeClass('d-none');
+        $("#Edit").hide();
+    }
+
+    function DisableForEdit(e) {
+        e.preventDefault()
+        $('#AlternateEmailAddress').prop('disabled', true);
+        $('#FirstName').prop('disabled', true);
+        $('#LastName').prop('disabled', true);
+        $('#PrimaryPhone').prop('disabled', true);
+        $('#AlternatePhone').prop('disabled', true);
+
+        $('#saveEdit').addClass('d-none');
+        $("#cancelEdit").addClass('d-none');
+        $("#Edit").show();
+    }
+</script>
+
+    
