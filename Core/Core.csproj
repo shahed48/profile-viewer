@@ -84,15 +84,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProfileViewerDBContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DB\UserProfiles.cs">
+      <DependentUpon>ProfileViewerDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\UserWorks.cs">
+      <DependentUpon>ProfileViewerDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Works.cs">
+      <DependentUpon>ProfileViewerDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\UserService.cs" />
+    <Compile Include="ViewModel\ProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="App.config" />
     <EntityDeploy Include="DB\ProfileViewerDBContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ProfileViewerDBContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="DB\ProfileViewerDBContext.edmx.diagram">
       <DependentUpon>ProfileViewerDBContext.edmx</DependentUpon>
     </None>

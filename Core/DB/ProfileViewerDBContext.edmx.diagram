@@ -13,6 +13,12 @@
         <AssociationConnector Association="ProfileViewerModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="ProfileViewerModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="ProfileViewerModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ProfileViewerModel.UserProfiles" Width="1.5" PointX="7.375" PointY="1.75" />
+        <EntityTypeShape EntityType="ProfileViewerModel.UserWorks" Width="1.5" PointX="10.125" PointY="3.125" />
+        <EntityTypeShape EntityType="ProfileViewerModel.Works" Width="1.5" PointX="7.375" PointY="5.625" />
+        <AssociationConnector Association="ProfileViewerModel.FK_UserProfiles_AspNetUsers" />
+        <AssociationConnector Association="ProfileViewerModel.FK_UserWorks_UserProfiles" />
+        <AssociationConnector Association="ProfileViewerModel.FK_UserWorks_Works" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

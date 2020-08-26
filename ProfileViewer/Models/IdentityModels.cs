@@ -21,7 +21,7 @@ namespace ProfileViewer.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("ProfileViewerDBContext", throwIfV1Schema: false)
+            : base("IdentityDBContext", throwIfV1Schema: false)
         {
         }
 
