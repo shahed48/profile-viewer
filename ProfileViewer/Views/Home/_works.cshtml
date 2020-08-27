@@ -1,2 +1,45 @@
-﻿
-<h2>Works</h2>
+﻿@model IEnumerable<Core.ViewModel.TaskViewModel>
+@using Microsoft.AspNet.Identity
+
+<div class="base-view">
+    <h4 class="site_color">Works</h4>
+    <h6 class="site_color">@User.Identity.GetUserName()</h6>
+    <br />
+    <table class="table table-bordered">
+        <tr class="heading">
+            <th>SL</th>
+            <th>Task</th>
+            <th>Description</th>
+            <th>Assigned To</th>
+            <th>End Date</th>
+            <th>Status</th>
+        </tr>
+        @{
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                string enddate = item.StartingDate.AddDays(item.NoOfDays).ToShortDateString();
+                <tr>
+                    <td class="text-center">@count</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskDescription)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.NameOfAssignee)
+                    </td>
+                    <td class="text-center">
+                        @enddate
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>

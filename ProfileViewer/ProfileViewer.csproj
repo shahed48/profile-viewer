@@ -351,8 +351,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Home\_dashboard.cshtml" />
-    <Content Include="Views\Home\_works.cshtml" />
     <Content Include="Views\Home\_profile.cshtml" />
+    <Content Include="Views\Home\_works.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

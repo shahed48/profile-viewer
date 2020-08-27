@@ -95,7 +95,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\UserService.cs" />
+    <Compile Include="Service\WorksService.cs" />
     <Compile Include="ViewModel\ProfileViewModel.cs" />
+    <Compile Include="ViewModel\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

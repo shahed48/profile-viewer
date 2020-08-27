@@ -2,15 +2,15 @@
 @using Microsoft.AspNet.Identity
 
 <div class="base-view">
-    <h4>My Profile</h4>
-    <h6>@User.Identity.GetUserName()</h6>
+    <h4 class="site_color">My Profile</h4>
+    <h6 class="site_color">@User.Identity.GetUserName()</h6>
 
     @using (Html.BeginForm())
     {
         <div class="row mt-2 mb-2">
             <div class="col-md-12">
                 <button class="btn btn-primary btn-sm pull-right" id="Edit" onclick="EnableForEdit(event)"><i class="fa fa-edit"></i>&nbsp;Edit</button>
-                <button type="submit" id="saveEdit" class="btn btn-success btn-sm d-none pull-right ml-2"><i class="fa fa-save"></i>&nbsp;Save</button>
+                <button type="submit" id="saveEdit" class="btn btn-success btn-sm d-none pull-right ml-2" onclick="SaveChanges(event)"><i class="fa fa-save"></i>&nbsp;Save</button>
                 <button type="button" id="cancelEdit" class="btn btn-danger btn-sm d-none pull-right" onclick="DisableForEdit(event)"><i class="fa fa-close"></i>&nbsp;Cancel</button>
             </div>
         </div>
@@ -90,6 +90,7 @@
 <script type="text/javascript">
     function EnableForEdit(e) {
         e.preventDefault()
+        $('#ParimaryEmailAddress').prop('disabled', false);
         $('#AlternateEmailAddress').prop('disabled', false);
         $('#FirstName').prop('disabled', false);
         $('#LastName').prop('disabled', false);
@@ -103,6 +104,7 @@
 
     function DisableForEdit(e) {
         e.preventDefault()
+        $('#ParimaryEmailAddress').prop('disabled', true);
         $('#AlternateEmailAddress').prop('disabled', true);
         $('#FirstName').prop('disabled', true);
         $('#LastName').prop('disabled', true);
@@ -112,6 +114,33 @@
         $('#saveEdit').addClass('d-none');
         $("#cancelEdit").addClass('d-none');
         $("#Edit").show();
+    }
+
+    function SaveChanges(e) {
+        e.preventDefault();
+        $('.loader').show();
+        var profileViewModel = {
+            Id: $('#Id').val(),
+            ParimaryEmailAddress: $('#ParimaryEmailAddress').val(),
+            AlternateEmailAddress: $('#AlternateEmailAddress').val(),
+            FirstName: $('#FirstName').val(),
+            LastName: $('#LastName').val(),
+            PrimaryPhone: $('#PrimaryPhone').val(),
+            AlternatePhone: $('#AlternatePhone').val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/Home/UpdateProfile',
+            data: { model: profileViewModel },
+            success: function (resp) {
+                $('.loader').hide();
+                alert(resp);
+            },
+            error: function (resp) {
+                $('.loader').hide();
+                alert(resp);
+            }
+        });
     }
 </script>
 
