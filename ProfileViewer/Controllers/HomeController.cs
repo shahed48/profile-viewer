@@ -57,7 +57,16 @@ namespace ProfileViewer.Controllers
         {
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "Account");
-            return PartialView("_works", worksService.GetTaskForUser(User.Identity.GetUserName()));
+            return PartialView("_works");
+        }
+
+        [HttpPost]
+        public ActionResult GetWorksOfLoggedUser()
+        {
+            if(!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
+            return Json(worksService.GetTaskForUser(User.Identity.GetUserName()), JsonRequestBehavior.AllowGet);
         }
     }
 }

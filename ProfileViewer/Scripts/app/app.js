@@ -26,6 +26,7 @@ function LoadViews(action_name) {
         success: function (response) {
             $(".loader").fadeOut();
             $('#SiteContent').empty().html(response);
+            $('#pageName').empty().append('Profile Viewer | ' + action_name);
         },
         failure: function (response) {
             $(".loader").fadeOut();

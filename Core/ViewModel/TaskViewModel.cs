@@ -14,6 +14,7 @@ namespace Core.ViewModel
         public string NameOfAssignee { get; set; }
         public DateTime StartingDate { get; set; }
         public int NoOfDays { get; set; }
+        public string EndDate { get; set; }
         public string Status { get; set; }
     }
 }

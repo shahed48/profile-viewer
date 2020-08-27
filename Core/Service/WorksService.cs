@@ -37,6 +37,7 @@ namespace Core.Service
                                     NameOfAssignee = up.FirstName + " " + up.LastName,
                                     Status = uw.StatusText
                                 }).ToList();
+                tasklist.ForEach(x => x.EndDate = x.StartingDate.AddDays(x.NoOfDays).ToShortDateString());
                 return tasklist;
             }
             catch (Exception e)
