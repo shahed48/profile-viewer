@@ -6,40 +6,44 @@
     <h6 class="site_color">@User.Identity.GetUserName()</h6>
     <br />
     <table class="table table-bordered">
-        <tr class="heading">
-            <th>SL</th>
-            <th>Task</th>
-            <th>Description</th>
-            <th>Assigned To</th>
-            <th>End Date</th>
-            <th>Status</th>
-        </tr>
-        @{
-            int count = 0;
-            foreach (var item in Model)
-            {
-                count++;
-                string enddate = item.StartingDate.AddDays(item.NoOfDays).ToShortDateString();
-                <tr>
-                    <td class="text-center">@count</td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TaskName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TaskDescription)
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.NameOfAssignee)
-                    </td>
-                    <td class="text-center">
-                        @enddate
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                </tr>
-            }
-        }
+        <thead>
+            <tr class="heading">
+                <th>SL</th>
+                <th>Task</th>
+                <th>Description</th>
+                <th>Assigned To</th>
+                <th>End Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="worklog">
+
+        </tbody>
 
     </table>
 </div>
+
+<script type="text/javascript">
+    $.ajax({
+        type: 'POST',
+        url: '/Home/GetWorksOfLoggedUser',
+        success: function (resp) {
+            var tBody = '';
+            $.each(resp, function (index, data) {
+                console.log(data);
+                var row = '<tr>';
+                row += '<td class="text-center">' + data.Id + '</td>';
+                row += '<td>' + data.TaskName + '</td>';
+                row += '<td>' + data.TaskDescription + '</td>';
+                row += '<td class="text-center">' + data.NameOfAssignee + '</td>';
+                row += '<td class="text-center">' + data.EndDate + '</td>';
+                row += '<td class="text-center">' + data.Status + '</td>';
+                tBody += row;
+            });
+            $('#worklog').empty().append(tBody);
+        },
+        error: function (resp) {
+            alert(resp);
+        }
+    })
+</script>
