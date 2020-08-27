@@ -13,9 +13,11 @@ namespace ProfileViewer.Controllers
     public class HomeController : Controller
     {
         private readonly UserService userService;
+        private readonly WorksService worksService;
         public HomeController()
         {
             userService = new UserService();
+            worksService = new WorksService();
         }
 
         public ActionResult Index()
@@ -44,13 +46,18 @@ namespace ProfileViewer.Controllers
             return PartialView("_profile", userService.GetUserProfileByEmail(User.Identity.GetUserName()));
         }
 
+        [HttpPost]
+        public ActionResult UpdateProfile(ProfileViewModel model)
+        {
+            return Json(userService.UpdateProfile(model), JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public ActionResult Works()
         {
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "Account");
-
-            return PartialView("_works");
+            return PartialView("_works", worksService.GetTaskForUser(User.Identity.GetUserName()));
         }
     }
 }

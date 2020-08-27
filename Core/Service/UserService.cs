@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Core.Service
 {
@@ -42,6 +43,42 @@ namespace Core.Service
             {
                 throw e;
             }
+        }
+
+        public string UpdateProfile(ProfileViewModel model)
+        {
+            string message = string.Empty;
+            try
+            {
+                var userProfile = db.UserProfiles.Find(model.Id);
+                var user = db.AspNetUsers.Find(userProfile.UserId);
+                bool isEmailAvailable = db.AspNetUsers.Where(x => x.Email.Equals(model.ParimaryEmailAddress)).FirstOrDefault() == null ? true : false;
+                if (isEmailAvailable || user.Email.Equals(model.ParimaryEmailAddress))
+                {
+                    user.Email = model.ParimaryEmailAddress;
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    userProfile.AlternateEmailAddress = model.AlternateEmailAddress;
+                    userProfile.FirstName = model.FirstName;
+                    userProfile.LastName = model.LastName;
+                    userProfile.PhoneNumber = model.PrimaryPhone;
+                    userProfile.AlternatePhoneNumber = model.AlternatePhone;
+                    db.Entry(userProfile).State = EntityState.Modified;
+                    db.SaveChanges();
+                    message = "Successfully Updated";
+                }
+                else
+                {
+                    message = "Primary Email is already associated with an account. Please try another one";
+                }
+            }
+            catch (Exception e)
+            {
+                message = "Oops! Something Went wrong. Please Try Again";
+            }
+
+            return message;
         }
     }
 }
