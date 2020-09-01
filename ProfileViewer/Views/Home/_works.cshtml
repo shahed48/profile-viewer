@@ -1,9 +1,7 @@
-﻿@model IEnumerable<Core.ViewModel.TaskViewModel>
-@using Microsoft.AspNet.Identity
-
+﻿
 <div class="base-view">
     <h4 class="site_color">Works</h4>
-    <h6 class="site_color">@User.Identity.GetUserName()</h6>
+    <h6 class="site_color">Md Shahjahan : Administrator</h6>
     <br />
     <div class="row">
         <div class="col-md-12">
@@ -29,9 +27,15 @@
 </div>
 
 <script type="text/javascript">
+    var token = localStorage.getItem('token');
+    if (token == '')
+        window.location.href = '/Account/Login';
     $.ajax({
-        type: 'POST',
-        url: '/Home/GetWorksOfLoggedUser',
+        type: 'GET',
+        url: development_api + 'dataProvider/worksList',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', token);
+        },
         success: function (resp) {
             var tBody = '';
             $.each(resp, function (index, data) {
@@ -50,5 +54,5 @@
         error: function (resp) {
             alert(resp);
         }
-    })
+    });
 </script>

@@ -11,6 +11,7 @@
     <script src="@Url.Content("~/Scripts/modernizr-2.8.3.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
     <script src="@Url.Content("~/Scripts/app/app.js")"></script>
+    <script src="@Url.Content("~/Scripts/app/apihost.js")"></script>
 
 </head>
 <body style="background-color: #e5e5e5;">
@@ -20,7 +21,20 @@
     <div class="wrapper">
         @Html.Partial("_LoginPartial")
         <div class="main-content">
-            @RenderBody()
+            <div class="top-bar d-flex pt-2 pb-2">
+                <div class="col-md-2">
+                    <a class="nav-bars" onclick="ToggleNavigation(event)"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-3 offset-md-7">
+                    <input type="text" placeholder="Search Here..." id="searchGlobal" class="form-control pull-right" />
+                </div>
+            </div>
+            <div class="base-view">
+                @RenderBody()
+            </div>
+            <div class="footer">
+                <p>&copy; - Copyright reserved to Shahjahan, 2020</p>
+            </div>
         </div>
     </div>
 
