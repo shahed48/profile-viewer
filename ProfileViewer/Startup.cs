@@ -8,7 +8,7 @@ namespace ProfileViewer
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            
         }
     }
 }

@@ -1,20 +1,13 @@
 ﻿<div class="sidebar">
-    <h2>ADMIN</h2>
+    <h2>AI</h2>
     <ul id="asideNav">
-        <li><a href="javascript:void(0)" class="nav-anchor active arrow" onclick="UpdateSelect(event, 'dashboard')"><i class="fa fa-home" aria-hidden="true"></i>Dashboard</a></li>
-        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'profile')"><i class="fa fa-user"></i>My Profile</a></li>
-        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'works')"><i class="fa fa-cog"></i>My Works</a></li>
-        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'business')"><i class="fa fa-cogs"></i>Manage Business</a></li>
-        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'users')"><i class="fa fa-user-plus"></i>Users</a></li>
-        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'Customers')"><i class="fa fa-user-circle"></i>Customers</a></li>
-        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(event, 'schedule')"><i class="fa fa-calendar"></i>Schedule</a></li>
-        @if (Request.IsAuthenticated)
-        {
-            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-            {
-                @Html.AntiForgeryToken()
-                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-power-off"></i>Logout</a></li>
-            }
-        }
+        <li><a href="javascript:void(0)" class="nav-anchor active arrow" onclick="UpdateSelect(this, 'dashboard')"><i class="fa fa-home" aria-hidden="true"></i><label class="nav-label">Dashboard</label></a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(this, 'profile')"><i class="fa fa-user"></i><label class="nav-label">My Profile</label></a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(this, 'works')"><i class="fa fa-cog"></i><label class="nav-label">My Works</label></a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(this, 'business')"><i class="fa fa-cogs"></i><label class="nav-label">Manage Business</label></a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(this, 'users')"><i class="fa fa-user-plus"></i><label class="nav-label">Users</label></a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(this, 'Customers')"><i class="fa fa-user-circle"></i><label class="nav-label">Customers</label></a></li>
+        <li><a href="javascript:void(0)" class="nav-anchor" onclick="UpdateSelect(this, 'schedule')"><i class="fa fa-calendar"></i><label class="nav-label">Schedule</label></a></li>
+        <li><a href="javascript:logout()"><i class="fa fa-power-off"></i><label class="nav-label">Logout</label></a></li>
     </ul>
 </div>
